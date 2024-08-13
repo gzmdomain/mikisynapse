@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: workspace_CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [workspace_publish]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  release:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Synapse workspace deployment
+        uses: azure/synapse-workspace-deployment@release-1.0
+        with:
+          # Provide the Synapse workspace name where you want to deploy the artifacts.
+          TargetWorkspaceName: 'mikiuat'
+          # Specify the path to the workspace artifacts template.
+          TemplateFile: './mikitest/TemplateForWorkspace.json'
+          # Specify the path to the template parameter file.
+          ParametersFile: './mikitest/TemplateParametersForWorkspace.json'              
+          # Provide the type of cloud environment. Valid values are: Azure Public, Azure China, Azure US Government, Azure Germany
+          Environment: 'Azure China'
+          # Provide the resource group of the target Synapse workspace.
+          resourceGroup: 'miki'
+          clientId: ${{secrets.CLIENTID}}
+          clientSecret:  ${{secrets.CLIENTSECRET}}
+          subscriptionId: ${{secrets.SUBSCRIPTIONID}}
+          tenantId: ${{secrets.TENANTID}}
+          DeleteArtifactsNotInTemplate: 'false'
