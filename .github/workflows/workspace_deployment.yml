@@ -3,6 +3,7 @@ name: workspace deployment
 on:
     push:
         branches: [ publish_branch ]
+    workflow_dispatch:
 jobs:
     release:
         # You also can use the self-hosted runners.
@@ -24,3 +25,5 @@ jobs:
           tenantId: ${{secrets.TENANTID}}
           DeleteArtifactsNotInTemplate: 'true'
           managedIdentity: 'False'
+       
+
