@@ -14,17 +14,18 @@
 		"mikitest-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:mikitest.sql.azuresynapse.azure.cn,1433;Initial Catalog=@{linkedService().DBName}"
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"value": "miki0507.database.chinacloudapi.cn"
+		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
+			"value": {
+				"location": "AutoResolve",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 0
+				}
+			}
 		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
-			"value": "miki524"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_userName": {
-			"value": "mikiadmin"
-		},
-		"mikitest-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"value": "https://mikitest.dfs.core.chinacloudapi.cn"
+		"Notebook 1_properties_bigDataPool_referenceName": {
+			"value": "mikipool"
 		}
 	}
 }

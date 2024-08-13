@@ -20,21 +20,20 @@
 			"metadata": "Secure string for 'connectionString' of 'mikitest-WorkspaceDefaultSqlServer'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:mikitest.sql.azuresynapse.azure.cn,1433;Initial Catalog=@{linkedService().DBName}"
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "miki0507.database.chinacloudapi.cn"
+		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
+			"type": "object",
+			"defaultValue": {
+				"location": "AutoResolve",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 0
+				}
+			}
 		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
+		"Notebook 1_properties_bigDataPool_referenceName": {
 			"type": "string",
-			"defaultValue": "miki524"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "mikiadmin"
-		},
-		"mikitest-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://mikitest.dfs.core.chinacloudapi.cn"
+			"defaultValue": "mikipool"
 		}
 	},
 	"variables": {
@@ -217,12 +216,12 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"server": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]",
-					"database": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]",
+					"server": "miki0507.database.chinacloudapi.cn",
+					"database": "miki524",
 					"encrypt": "mandatory",
 					"trustServerCertificate": false,
 					"authenticationType": "SQL",
-					"userName": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]",
+					"userName": "mikiadmin",
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('AzureSqlDatabase1_password')]"
@@ -269,7 +268,7 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('mikitest-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					"url": "https://mikitest.dfs.core.chinacloudapi.cn"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -287,14 +286,7 @@
 			"properties": {
 				"type": "Managed",
 				"typeProperties": {
-					"computeProperties": {
-						"location": "AutoResolve",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 0
-						}
-					}
+					"computeProperties": "[parameters('AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties')]"
 				}
 			},
 			"dependsOn": []
@@ -306,6 +298,71 @@
 			"properties": {
 				"type": "ManagedIdentity",
 				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Notebook 1')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "[parameters('Notebook 1_properties_bigDataPool_referenceName')]",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "28g",
+					"driverCores": 4,
+					"executorMemory": "28g",
+					"executorCores": 4,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "376fff72-1cf2-49a8-98ea-9f2527a47946"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/c8f38693-43f1-41ee-99c5-3392e9af8d9a/resourceGroups/miki/providers/Microsoft.Synapse/workspaces/mikitest/bigDataPools/mikipool",
+						"name": "mikipool",
+						"type": "Spark",
+						"endpoint": "https://mikitest.dev.azuresynapse.azure.cn/livyApi/versions/2019-11-01-preview/sparkPools/mikipool",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.4",
+						"nodeCount": 10,
+						"cores": 4,
+						"memory": 28,
+						"automaticScaleJobs": false
+					},
+					"sessionKeepAliveTimeout": 30
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {},
+						"source": [
+							"print(\"11\")"
+						],
+						"outputs": [],
+						"execution_count": 2
+					}
+				]
 			},
 			"dependsOn": []
 		},
