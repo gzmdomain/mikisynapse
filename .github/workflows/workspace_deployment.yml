@@ -16,7 +16,7 @@ jobs:
           TargetWorkspaceName: 'mikiuat'
           TemplateFile: './mikitest/TemplateForWorkspace.json'
           ParametersFile: './mikitest/TemplateParametersForWorkspace.json'
-          OverrideArmParameters: './path of the parameters.yaml'
+          OverrideArmParameters: './mikitest/OverrideArmParameters.yaml'
           environment: 'Azure China'
           resourceGroup: 'miki'
           clientId: ${{secrets.CLIENTID}}
