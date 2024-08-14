@@ -3,6 +3,7 @@ name: workspace deployment
 on:
     push:
         branches: [ publish_branch ]
+    workflow_dispatch:
 jobs:
     release:
         # You also can use the self-hosted runners.
@@ -15,6 +16,7 @@ jobs:
           TargetWorkspaceName: 'mikiuat'
           TemplateFile: './mikitest/TemplateForWorkspace.json'
           ParametersFile: './mikitest/TemplateParametersForWorkspace.json'
+          OverrideArmParameters: './mikitest/OverrideArmParameters.yaml'
           environment: 'Azure China'
           resourceGroup: 'miki'
           clientId: ${{secrets.CLIENTID}}
@@ -23,3 +25,4 @@ jobs:
           tenantId: ${{secrets.TENANTID}}
           DeleteArtifactsNotInTemplate: 'true'
           managedIdentity: 'False'
+       
