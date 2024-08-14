@@ -32,7 +32,7 @@ jobs:
           TemplateFile: './mikitest/TemplateForWorkspace.json'
           # Specify the path to the template parameter file.
           ParametersFile: './mikitest/TemplateParametersForWorkspace.json'   
-          OverrideArmParameters:'./mikitest/parameters/test/parameters.yaml'
+          OverrideArmParameters: './mikitest/parameters/test/parameters.yaml'
           # Provide the type of cloud environment. Valid values are: Azure Public, Azure China, Azure US Government, Azure Germany
           Environment: 'Azure China'
           # Provide the resource group of the target Synapse workspace.
