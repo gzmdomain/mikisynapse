@@ -14,6 +14,9 @@
 		"mikitest-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:mikitest.sql.azuresynapse.azure.cn,1433;Initial Catalog=@{linkedService().DBName}"
 		},
+		"AzureSqlDatabase2_connectionString": {
+			"value": ""
+		},
 		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
 			"value": {
 				"location": "AutoResolve",
@@ -25,6 +28,9 @@
 			}
 		},
 		"Notebook 1_properties_bigDataPool_referenceName": {
+			"value": "mikipool"
+		},
+		"Notebook 3_properties_bigDataPool_referenceName": {
 			"value": "mikipool"
 		}
 	}
