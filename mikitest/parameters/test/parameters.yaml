@@ -1,2 +1,2 @@
 Notebook 1_properties_bigDataPool_referenceName : mikipooluat
-mikitest-WorkspaceDefaultSqlServer_connectionString : Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:mikiuat.sql.azuresynapse.azure.cn,1433;Initial Catalog=@{linkedService().DBName}
+AzureSqlDatabase2_connectionString : integrated security=False;encrypt=True;connection timeout=30;data source=miki0507.database.chinacloudapi.cn;initial catalog=miki524;user id=mikiadmin
