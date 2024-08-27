@@ -513,7 +513,7 @@
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
-				"description": "11",
+				"description": "1111",
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
