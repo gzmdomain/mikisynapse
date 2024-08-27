@@ -57,7 +57,7 @@
                 "typeProperties": {
                     "accountName": "=",
                     "username": "=",
-                    "connectionString": "|:-connectionString:secureString",
+                    "connectionString": "=",
                     "secretAccessKey": "|"
                 }
             }
