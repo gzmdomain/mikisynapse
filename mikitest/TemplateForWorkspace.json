@@ -217,7 +217,7 @@
 				"typeProperties": {
 					"server": "miki0507.database.chinacloudapi.cn",
 					"database": "miki524",
-					"encrypt": "mandatory",
+					"encrypt": "optional",
 					"trustServerCertificate": false,
 					"authenticationType": "SQL",
 					"userName": "mikiadmin",
